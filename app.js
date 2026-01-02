@@ -1,7 +1,8 @@
 // app.js
+require('dotenv').config();
 const express = require("express");
 const app = express();
-require('dotenv').config();
+
 
 // for password hashing
 const bcrypt = require("bcrypt");

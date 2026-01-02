@@ -9,10 +9,10 @@
         body {
             font-family: Arial, sans-serif;
             background-color: #f0f0f0;
+            padding: 20px;
             display: flex;
             flex-direction: column;
-            align-items: center;
-            padding: 20px;
+            align-items: flex-start;
         }
 
         #link {
@@ -20,7 +20,6 @@
             font-size: 1.2rem;
             margin-bottom: 20px;
             display: inline-block;
-            margin-right: 50%;
         }
 
         #link:hover {
@@ -35,6 +34,15 @@
             background-color: #e0e0e0;
             border-radius: 5px;
             border: 1px solid black;
+            min-width: 260px;
+        }
+
+        .container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-width: 100%;
         }
     </style>
 </head>
@@ -43,31 +51,34 @@
     <h1>Your Results</h1>
     <a href="/user-login/<%=userId%>" id="link">
         << back-to-user-home-page</a>
-            <% for(result of results) { %>
-                <div class="box">
-                    <h3>RESULT ID: <%= result._id %>
-                    </h3>
-                    <p><strong>userId:</strong>
-                        <%= result.userId %>
-                    </p>
-                    <p><strong>sessionId:</strong>
-                        <%= result.sessionId %>
-                    </p>
+            <div class="container">
+                <% for(result of results) { %>
+                    <div class="box">
+                        <h3>RESULT ID: <%= result._id %>
+                        </h3>
+                        <p><strong>userId:</strong>
+                            <%= result.userId %>
+                        </p>
+                        <p><strong>sessionId:</strong>
+                            <%= result.sessionId %>
+                        </p>
 
-                    <p><strong>totalQuestions:</strong>
-                        <%= result.totalQuestions %>
-                    </p>
-                    <p><strong>correctAnswers:</strong>
-                        <%= result.correctAnswers %>
-                    </p>
-                    <p><strong>wrongAnswers:</strong>
-                        <%= result.wrongAnswers %>
-                    </p>
-                    <p><strong>scorePercentage:</strong>
-                        <%= result.scorePercentage %>%
-                    </p>
-                </div>
-                <% } %>
+                        <p><strong>totalQuestions:</strong>
+                            <%= result.totalQuestions %>
+                        </p>
+                        <p><strong>correctAnswers:</strong>
+                            <%= result.correctAnswers %>
+                        </p>
+                        <p><strong>wrongAnswers:</strong>
+                            <%= result.wrongAnswers %>
+                        </p>
+                        <p><strong>scorePercentage:</strong>
+                            <%= result.scorePercentage %>%
+                        </p>
+                    </div>
+                    <% } %>
+            </div>
+
 </body>
 
 </html>
