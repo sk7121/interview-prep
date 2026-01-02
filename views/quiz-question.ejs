@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>quiz-question</title>
+    <style>
+        form {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            gap: 3rem;
+        }
+
+        #ques {
+            font-family: sans-serif;
+            font-size: 2rem;
+            font-style: italic;
+            font-weight: bolder;
+            padding: 1rem 1rem;
+            border-radius: 10px;
+            background-color: rgb(170, 215, 247);
+            box-shadow: 1px 1px 1px blue;
+            color: blueviolet;
+        }
+
+        #mcq {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-around;
+            align-items: center;
+            width: 90%;
+        }
+
+        .row {
+            display: flex;
+            flex-direction: row;
+            justify-content: space-around;
+            align-items: center;
+            width: 100%;
+        }
+
+        .col {
+            font-family: sans-serif;
+            font-size: larger;
+            font-style: italic;
+            font-weight: bold;
+            border-radius: 10px;
+            color: black;
+            display: flex;
+            flex-direction: row;
+            justify-content: center;
+            align-items: center;
+            min-width: 30vw;
+            margin-top: 5rem;
+            background-color: rgb(180, 220, 207);
+            cursor: pointer;
+            border: none;
+            transition: 0.6s;
+        }
+
+        .col:hover {
+            scale: 1.04;
+            background-color: aquamarine;
+        }
+
+        .value {
+            font-size: large;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Quiz-Question</h1>
+    <% if (question && practiceSession) { %>
+        <form action="/submit/question/<%=question._id%>/<%=practiceSession._id%>" method="post">
+
+            <div id="ques"> Question >><%=question.questionText%>
+            </div>
+            <div id="mcq">
+                <div class="row">
+                    <button class="col" onclick="set_value(this)">
+                        option <h2 class="value">A</h2>: <%=question.optionA%>
+                    </button>
+                    <button class="col" onclick="set_value(this)">
+                        option <h2 class="value">B</h2>: <%=question.optionB%>
+                    </button>
+
+                </div>
+                <div class="row">
+                    <button class="col" onclick="set_value(this)">
+                        option <h2 class="value">C</h2>: <%=question.optionC%>
+                    </button>
+                    <button class="col" onclick="set_value(this)">
+                        option <h2 class="value">D</h2>: <%=question.optionD%>
+                    </button>
+                </div>
+                <input type="text" name="correctAnswer" value="" id="correctAnswer" style="display: none;">
+            </div>
+
+        </form>
+
+        <% } else { %>
+            <p>Something went wrong.</p>
+            <% } %>
+
+                <script>
+                    let input = document.getElementById("correctAnswer");
+
+                    function set_value(el) {
+                        let valueEl = el.querySelector(".value");
+                        input.value = valueEl.innerText;
+                    }
+                </script>
+</body>
+
+</html>

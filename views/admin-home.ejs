@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>admin-home-page</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+            padding: 20px;
+        }
+
+        h1 {
+            color: #333;
+        }
+
+        a {
+            display: inline-block;
+            margin: 10px 0;
+            padding: 10px 15px;
+            background-color: #4A90E2;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+        }
+
+        a:hover {
+            background-color: #357ABD;
+        }
+        #logout-link {
+            background-color: #ff4d4d;
+            float: right;
+            padding: 8px 12px;
+            border-radius: 5px;
+            text-decoration: none;
+            color: white;
+            font-size: 1rem;
+            position: absolute;
+            top: 20px;
+            right: 20px;
+        }
+        #logout-link:hover {
+            background-color: #e60000;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Welcome, Admin!</h1>
+    <div>
+        <a href="/show-questions">Show Questions</a>
+        <a href="/add-question">Add Question</a>
+    </div>
+    <a href="/" id="logout-link">log out</a>
+        
+</body>
+
+</html>

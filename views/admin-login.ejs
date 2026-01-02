@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin-Login</title>
+    <style>
+        body {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            font-family: Arial, sans-serif;
+            background-color: #f9f9f9;
+            padding: 50px;
+        }
+
+        #admin-login-form {
+            width: 50vw;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            gap: 3.2vh;
+            background-color: #f8ee648c;
+            padding: 5%;
+            border-radius: 20px;
+        }
+
+        #admin-login-form .box {
+            display: flex;
+            flex-direction: row;
+            gap: 8%;
+            margin-bottom: 15px;
+            width: 60%;
+        }
+
+        #admin-login-form label {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40%;
+            font-size: 1.2rem;
+        }
+
+        #admin-login-form input {
+            width: 60%;
+            height: 4vh;
+            align-items: center;
+            font-size: 1.2rem;
+            border-radius: 8px;
+            padding: 1%;
+            background-color: #8c9ff496;
+            border: none;
+        }
+
+        #admin-login-form input:focus {
+            border: none;
+            outline: 2px solid #4A90E2;
+            background-color: white;
+        }
+
+        #admin-login-btn {
+            width: 30%;
+            height: 5vh;
+            font-size: 1.2rem;
+            border-radius: 8px;
+            background-color: #4A90E2;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+
+        #admin-login-btn:hover {
+            background-color: #357ABD;
+        }
+
+        #logout-link {
+            background-color: #ff4d4d;
+            float: right;
+            padding: 8px 12px;
+            border-radius: 5px;
+            text-decoration: none;
+            color: white;
+            font-size: 1rem;
+            position: absolute;
+            top: 20px;
+            right: 20px;
+        }
+
+        #logout-link:hover {
+            background-color: #e60000;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Admin Login</h1>
+    <form action="/admin/home" method="post" id="admin-login-form">
+        <div class="box">
+            <label for="admin-username">Admin Name:</label>
+            <input type="text" id="admin-username" name="admin-username" required>
+        </div>
+
+        <div class="box">
+            <label for="admin-email">Admin Email:</label>
+            <input type="email" id="admin-email" name="admin-email" required>
+        </div>
+
+        <div class="box">
+            <label for="admin-password">Admin Password:</label>
+            <input type="password" id="admin-password" name="admin-password" required>
+        </div>
+        <button type="submit" id="admin-login-btn">Login</button>
+        <a href="/" id="logout-link">
+            << back to login </a>
+
+</body>
+
+</html>

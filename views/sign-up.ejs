@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>sign-up Page.</title>
+    <style>
+        body {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            font-family: Arial, sans-serif;
+            background-color: #f9f9f9;
+            padding: 50px;
+        }
+
+        #sign-up-form {
+            width: 50vw;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            gap: 2.5vh;
+            background-color: #64e7f88c;
+            padding: 5%;
+            border-radius: 20px;
+        }
+
+        #sign-up-form .box {
+            display: flex;
+            flex-direction: row;
+            gap: 20%;
+            margin-bottom: 15px;
+            width: 60%;
+        }
+
+        #sign-up-form label {
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+            width: 40%;
+            font-size: 1.2rem;
+        }
+
+        #sign-up-form input {
+            width: 60%;
+            height: 4vh;
+            align-items: center;
+            font-size: 1.2rem;
+            border-radius: 8px;
+            padding: 1%;
+            background-color: #8c9ff496;
+            border: none;
+        }
+
+        #sign-up-form input:focus {
+            border: none;
+            outline: 2px solid #4A90E2;
+            background-color: white;
+        }
+
+        #sign-up-btn {
+            width: 16%;
+            height: 5.5vh;
+            font-size: 1.2rem;
+            border-radius: 8px;
+            background-color: #4A90E2;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+
+        #sign-up-btn:hover {
+            background-color: #357ABD;
+        }
+
+        #logout-link {
+            background-color: #ff4d4d;
+            float: right;
+            padding: 8px 12px;
+            border-radius: 5px;
+            text-decoration: none;
+            color: white;
+            font-size: 1rem;
+            position: absolute;
+            top: 20px;
+            right: 20px;
+        }
+
+        #logout-link:hover {
+            background-color: #e60000;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Sign Up Page</h1>
+    <form id="sign-up-form" action="/sign-up" method="POST">
+        <div class="box">
+            <label for="name">name:</label>
+            <input type="text" id="name" name="name" required>
+        </div>
+        <div class="box">
+            <label for="email">Email:</label>
+            <input type="email" id="email" name="email" required>
+        </div>
+        <div class="box">
+            <label for="password">Password:</label>
+            <input type="password" id="password" name="password" required>
+        </div>
+        <button type="submit" id="sign-up-btn">Sign Up</button>
+        <a href="/" id="logout-link">
+            << back to login </a>
+</body>
+
+</html>

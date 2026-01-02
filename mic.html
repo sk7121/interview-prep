@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Voice Input</title>
+</head>
+
+<body>
+
+    <input type="text" id="text" name="voiceText">
+    <button onclick="startMic()">🎤 Speak</button>
+
+    <script>
+        const SpeechRecognition =
+            window.SpeechRecognition || window.webkitSpeechRecognition;
+
+        const recognition = new SpeechRecognition();
+        recognition.lang = "en-IN";
+        recognition.continuous = false;
+
+        function startMic() {
+            recognition.start();
+        }
+
+        recognition.onresult = function (event) {
+            document.getElementById("text").value =
+                event.results[0][0].transcript;
+        };
+    </script>
+
+</body>
+
+</html>
