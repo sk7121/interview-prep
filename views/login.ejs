@@ -46,9 +46,8 @@
             height: 4vh;
             align-items: center;
             font-size: 1.2rem;
-            border-radius: 8px;
+            border-radius: 5px;
             padding: 1%;
-            background-color: #8c9ff496;
             border: none;
         }
 
@@ -65,14 +64,16 @@
             cursor: pointer;
             padding: 1%;
             border-radius: 5px;
-            background-color: #a185e4;
+            background-color: #d2c6f1;
             border: none;
             min-width: 100px;
+            transition: 0.5s;
         }
 
         #login-btn:hover {
             background-color: #7b5fc0;
             color: white;
+            box-shadow: 1px 1px 1px black;
         }
 
         h1 {
@@ -85,11 +86,17 @@
             background: none;
             border: none;
             cursor: pointer;
+            color: rgb(84, 128, 140);
+            transition: 0.5s;
+            text-decoration: none;
         }
 
         #admin-btn:hover {
-            color: #54808C;
+            color: rgb(250, 67, 67);
+            border-radius: 10px;
+            padding: 1px;
             text-decoration: underline;
+
         }
 
         #admin-form {
@@ -98,10 +105,16 @@
             align-items: center;
             position: absolute;
             right: 5px;
-            background-color: #d4e9eb;
+            background-color: transparent;
             padding: 1%;
             min-width: 100px;
             border-radius: 8%;
+            transition: 0.5s;
+        }
+
+        #admin-form:hover {
+            scale: 1.04;
+            background-color: #d4e9eb;
         }
 
         #signup-btn {
@@ -110,10 +123,14 @@
             border: none;
             cursor: pointer;
             color: #4A90E2;
+            border-radius: 5px;
+            padding: 1px;
+            transition: 0.5s;
         }
 
         #signup-btn:hover {
             text-decoration: underline;
+            box-shadow: 1px 1px 1px black;
         }
 
         #login-container {
@@ -121,10 +138,10 @@
             flex-direction: column;
             align-items: center;
             gap: 3vh;
-            background-color: #64e7f88c;
             padding: 5%;
-            border-radius: 20px;
+            border-radius: 5px;
             min-width: 350px;
+            background: linear-gradient(45deg, rgb(143 137 137), transparent);
         }
     </style>
 </head>
@@ -143,7 +160,7 @@
     <div id="login-container">
         <form action="/user-login" method="POST" id="login-form">
             <div class="box">
-                <label for="email">email:</label>
+                <label for="email">Email:</label>
                 <input type="email" id="email" name="email" required>
             </div>
             <div class="box">

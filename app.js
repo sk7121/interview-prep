@@ -175,7 +175,10 @@ app.get("/take-quiz/:practiceSessionId", async (req, res) => {
 app.get("/submit/quiz/:practiceSessionId", async(req,res)=>{
   try{
     const {practiceSessionId} = req.params;
-
+    const is_exist = await Result.findOne({sessionId:practiceSessionId});
+    if(is_exist){
+      return res.send(`sessionId ${practiceSessionId} already submitted.`);
+    }
     const practiceSession = await PracticeSession.findById(practiceSessionId);
 
     if(!practiceSession){
