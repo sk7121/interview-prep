@@ -224,6 +224,29 @@ app.get("/submit/quiz/:practiceSessionId", async(req,res)=>{
 });
 
 
+// show full result 
+app.get("/show-results/result/:id", async(req,res)=>{
+  const {id} = req.params;
+
+  const result = await Result.findOne({_id:id});
+  if(!result){
+    return res.send("result not found!");
+  }
+
+  const submissions = await Submission.find({sessionId:result.sessionId});
+  if(!submissions){
+    return res.send("there is no submissions for this result.");
+  }
+
+  const questionIds = submissions.map(sub=>sub.questionId);
+  const questions = await Question.find({_id:{$in:questionIds}});
+
+  console.log(questions);
+  console.log(submissions);
+
+  return res.render("show-detailed-result.ejs",{questions,submissions});
+});
+
 // Admin Home Page Route
 app.post("/admin/home", async (req, res) => {
   try {
