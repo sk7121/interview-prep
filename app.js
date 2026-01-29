@@ -1,6 +1,7 @@
-// app.js
 require('dotenv').config();
 const express = require("express");
+const session = require("express-session");
+const MongoStore = require("connect-mongo");
 const app = express();
 
 
@@ -15,7 +16,7 @@ const Result = require("./models/Result");
 
 
 // express body parser middleware
-app.use(express.urlencoded({extended:true}));
+app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
 
@@ -28,6 +29,39 @@ app.set("views", path.join(__dirname, "views"));
 
 
 
+const store = MongoStore.create({
+  mongoUrl: process.env.ATLASDB_URL,
+  crypto: {
+    secret: "thisshouldbeabettersecret!"
+  },
+  touchAfter: 24 * 60 * 60
+});
+
+store.on("error", function (e) {
+  console.log("SESSION STORE ERROR", e)
+});
+
+//express-sessions
+const sessionOptions = {
+  store: store,
+  secret: "thisshouldbeabettersecret!",
+  resave: false,
+  saveUninitialized: true,
+  cookie: {
+    httpOnly: true,
+    expires: Date.now() + 1000 * 60 * 60 * 24 * 7,
+    maxAge: 1000 * 60 * 60 * 24 * 7
+  },
+};
+
+
+app.use(session(sessionOptions));
+app.use(flash());
+
+app.use(passport.initialize());
+app.use(passport.session());
+app.use(passport.authenticate("session"));
+
 // mongoose setup
 const mongoose = require("mongoose");
 
@@ -35,109 +69,108 @@ const port = 8080;
 const MONGO_URL = process.env.ATLASDB_URL;
 
 mongoose.connect(MONGO_URL)
-    .then(() => {
-        console.log("Connected to MongoDB");
-    })
-    .catch(err => {
-        console.log("Error connecting to MongoDB:", err);
-    })
-
+  .then(() => {
+    console.log("Connected to MongoDB");
+  })
+  .catch(err => {
+    console.log("Error connecting to MongoDB:", err);
+  })
 
 
 
 // Login Page Route
 app.get("/", (req, res) => {
-    res.render("login.ejs");
+  res.render("login.ejs");
 });
 
 // Query Page Route
 app.get("/queryPage", (req, res) => {
-    res.render("queryPage.ejs");
+  res.render("queryPage.ejs");
 });
 
 // signup Page Route
 app.get("/signup", (req, res) => {
-    res.render("sign-up.ejs");
+  res.render("sign-up.ejs");
 });
 
 // Admin Login Page Route
 app.get("/admin-login", (req, res) => {
-    res.render("admin-login.ejs");
+  res.render("admin-login.ejs");
 });
 
 
 // show Questions Page Route
 app.get("/show-questions", async (req, res) => {
-    const questions = await Question.find({});
-    return res.render("show-questions.ejs",{questions});
+  const questions = await Question.find({});
+  return res.render("show-questions.ejs", { questions });
 });
 
 // Add Question Page Route
 app.get("/add-question", (req, res) => {
-    res.render("add-question.ejs");
+  res.render("add-question.ejs");
 });
 
 // Home Page Route
-app.post ("/home", async(req, res) => {
-    const UserDetails = req.body;
-    return res.render("home.ejs", {UserDetails});
+app.post("/home", async (req, res) => {
+  const UserDetails = req.body;
+  return res.render("home.ejs", { UserDetails });
 });
 
 
 // back to login panel page
 app.get("/back-to-admin-panel", (req, res) => {
-    res.render("admin-home.ejs");
+  res.render("admin-home.ejs");
 });
 
 // Delete Question Route
 app.get("/delete/question/:id", async (req, res) => {
-    const { id } = req.params;
-    await Question.findByIdAndDelete(id);
-    return res.redirect("/show-questions");
+  const { id } = req.params;
+  await Question.findByIdAndDelete(id);
+  return res.redirect("/show-questions");
 });
 
 
 // quiz page route
 app.get("/take-quiz", async (req, res) => {
-    const questions = await Question.find({});
-    res.render("take-quiz.ejs", { questions});
+  const questions = await Question.find({});
+  res.render("take-quiz.ejs", { questions });
 });
 
 // query page route
-app.get("/query-page/:id", async(req, res) => {
-    const {id} = req.params;
-    res.render("query-page.ejs",{id});
+app.get("/query-page/:id", async (req, res) => {
+  const { id } = req.params;
+  res.render("query-page.ejs", { id });
 });
 
 // redirect user home page route
-app.get("/user-login/:userId",async(req,res)=>{
+app.get("/user-login/:userId", async (req, res) => {
   const userId = req.params.userId.replace(/^:/, '');
   const UserDetails = await User.findById(userId);
   if (!UserDetails) {
     return res.status(404).send("User not found");
   }
-  return res.render("user-home.ejs",{UserDetails});
+  return res.render("user-home.ejs", { UserDetails });
 });
 
 // view scores
-app.get("/view-scores/:userId",async(req,res)=>{
-  const {userId} = req.params;
-  const results = await Result.find({userId});
-  return res.render("show-results.ejs",{results,userId});
+app.get("/view-scores/:userId", async (req, res) => {
+  const { userId } = req.params;
+  const results = await Result.find({ userId });
+  return res.render("show-results.ejs", { results, userId });
 });
 
 
 // expand question route
-app.get("/quiz/question/:questionId/:practiceSessionId",async (req,res)=>{
-    const {questionId,practiceSessionId} = req.params;
+app.get("/quiz/question/:questionId/:practiceSessionId", async (req, res) => {
+  const { questionId, practiceSessionId } = req.params;
 
-    const question = await Question.findOne({_id:questionId});
-    const practiceSession = await PracticeSession.findOne({_id:practiceSessionId});
+  const question = await Question.findOne({ _id: questionId });
+  const practiceSession = await PracticeSession.findOne({ _id: practiceSessionId });
 
-    if(!question|| !practiceSession){
-      return res.status(404).send("Question or Practice Session not found");
-    }
-    return res.render("quiz-question.ejs",{question,practiceSession});
+  if (!question || !practiceSession) {
+    return res.status(404).send("Question or Practice Session not found");
+  }
+  return res.render("quiz-question.ejs", { question, practiceSession });
 });
 
 // redirect take-quiz route
@@ -145,7 +178,7 @@ app.get("/take-quiz/:practiceSessionId", async (req, res) => {
   const { practiceSessionId } = req.params;
 
   const practiceSession = await PracticeSession.findById(practiceSessionId);
-  if(!practiceSession){
+  if (!practiceSession) {
     return res.send("session not found!");
   }
 
@@ -172,16 +205,16 @@ app.get("/take-quiz/:practiceSessionId", async (req, res) => {
 
 
 // submit quiz route
-app.get("/submit/quiz/:practiceSessionId", async(req,res)=>{
-  try{
-    const {practiceSessionId} = req.params;
-    const is_exist = await Result.findOne({sessionId:practiceSessionId});
-    if(is_exist){
+app.get("/submit/quiz/:practiceSessionId", async (req, res) => {
+  try {
+    const { practiceSessionId } = req.params;
+    const is_exist = await Result.findOne({ sessionId: practiceSessionId });
+    if (is_exist) {
       return res.send(`sessionId ${practiceSessionId} already submitted.`);
     }
     const practiceSession = await PracticeSession.findById(practiceSessionId);
 
-    if(!practiceSession){
+    if (!practiceSession) {
       return res.status(404).send("Practice session not found!");
     }
 
@@ -195,15 +228,15 @@ app.get("/submit/quiz/:practiceSessionId", async(req,res)=>{
     const questionIds = questions.map(q => q._id);
 
     const submissions = await Submission.find({
-      questionId:{$in:questionIds},
+      questionId: { $in: questionIds },
       sessionId: practiceSessionId
     });
 
 
 
-    const no_of_correct_ans = submissions.reduce((count, s) => count + (s.isCorrect? 1 : 0),0);
+    const no_of_correct_ans = submissions.reduce((count, s) => count + (s.isCorrect ? 1 : 0), 0);
     const no_of_wrong_ans = submissions.length - no_of_correct_ans;
-    const score_percent = (no_of_correct_ans/submissions.length)*100;
+    const score_percent = (no_of_correct_ans / submissions.length) * 100;
 
     const result = new Result({
       userId: practiceSession.userId,
@@ -217,7 +250,7 @@ app.get("/submit/quiz/:practiceSessionId", async(req,res)=>{
     await result.save();
 
     return res.redirect(`/user-login/${practiceSession.userId}`);
-  }catch(error){
+  } catch (error) {
     console.error(error);
     res.status(500).send("Server error");
   }
@@ -225,26 +258,26 @@ app.get("/submit/quiz/:practiceSessionId", async(req,res)=>{
 
 
 // show full result 
-app.get("/show-results/result/:id", async(req,res)=>{
-  const {id} = req.params;
+app.get("/show-results/result/:id", async (req, res) => {
+  const { id } = req.params;
 
-  const result = await Result.findOne({_id:id});
-  if(!result){
+  const result = await Result.findOne({ _id: id });
+  if (!result) {
     return res.send("result not found!");
   }
 
-  const submissions = await Submission.find({sessionId:result.sessionId});
-  if(!submissions){
+  const submissions = await Submission.find({ sessionId: result.sessionId });
+  if (!submissions) {
     return res.send("there is no submissions for this result.");
   }
 
-  const questionIds = submissions.map(sub=>sub.questionId);
-  const questions = await Question.find({_id:{$in:questionIds}});
+  const questionIds = submissions.map(sub => sub.questionId);
+  const questions = await Question.find({ _id: { $in: questionIds } });
 
   console.log(questions);
   console.log(submissions);
 
-  return res.render("show-detailed-result.ejs",{questions,submissions});
+  return res.render("show-detailed-result.ejs", { questions, submissions });
 });
 
 // Admin Home Page Route
@@ -335,108 +368,108 @@ app.post("/admin/add-question", async (req, res) => {
 
 // user sign-up route
 app.post("/sign-up", async (req, res) => {
-    try {
-        const { name, email, password } = req.body;
-        const existingUser = await User.findOne({ email });
-        if (existingUser) {
-            return res.status(400).send("User already exists");
-        }
-
-        const newUser = new User({
-            name,
-            email,
-            password
-        });
-
-        await newUser.save();
-        res.redirect("/");
-    } catch (error) {
-        console.error("Error creating user:", error);
-        res.status(500).send("Error creating user");
+  try {
+    const { name, email, password } = req.body;
+    const existingUser = await User.findOne({ email });
+    if (existingUser) {
+      return res.status(400).send("User already exists");
     }
+
+    const newUser = new User({
+      name,
+      email,
+      password
+    });
+
+    await newUser.save();
+    res.redirect("/");
+  } catch (error) {
+    console.error("Error creating user:", error);
+    res.status(500).send("Error creating user");
+  }
 });
 
 
 // user login route
 app.post("/user-login", async (req, res) => {
-    try {
-        const { email, password } = req.body;
-        const user = await User.findOne({ email });
-        if (!user) {
-            return res.status(401).send("Invalid credentials");
-        }
-
-        const isMatch = await password === user.password;
-
-        if (!isMatch) {
-            return res.status(401).send("Invalid credentials");
-        }
-
-        return res.render("user-home.ejs", {
-            UserDetails: user
-        });
-    } catch (error) {
-        console.error("Error logging in user:", error);
-        res.status(500).send("Error logging in user");
+  try {
+    const { email, password } = req.body;
+    const user = await User.findOne({ email });
+    if (!user) {
+      return res.status(401).send("Invalid credentials");
     }
+
+    const isMatch = await password === user.password;
+
+    if (!isMatch) {
+      return res.status(401).send("Invalid credentials");
+    }
+
+    return res.render("user-home.ejs", {
+      UserDetails: user
+    });
+  } catch (error) {
+    console.error("Error logging in user:", error);
+    res.status(500).send("Error logging in user");
+  }
 });
 
 // query post route
 app.post("/query-page/query/:id", async (req, res) => {
-    const {id} = req.params;
-    const UserDetails = req.body;
-    const filteredQuestions = await Question.find({
-        difficulty: UserDetails.difficulty,
-        interviewType: UserDetails.interviewType,
-    });
+  const { id } = req.params;
+  const UserDetails = req.body;
+  const filteredQuestions = await Question.find({
+    difficulty: UserDetails.difficulty,
+    interviewType: UserDetails.interviewType,
+  });
 
-    const practiceSession = new PracticeSession({
-        userId:id,
-        filters:{
-            difficulty:UserDetails.difficulty,
-            interviewType:UserDetails.interviewType,
-        },
-    });
-    await practiceSession.save();
+  const practiceSession = new PracticeSession({
+    userId: id,
+    filters: {
+      difficulty: UserDetails.difficulty,
+      interviewType: UserDetails.interviewType,
+    },
+  });
+  await practiceSession.save();
 
-    const submittedQuestionIds = new Set();
+  const submittedQuestionIds = new Set();
 
-    return res.render("take-quiz.ejs",{questions:filteredQuestions,practiceSession,submittedQuestionIds});
+  return res.render("take-quiz.ejs", { questions: filteredQuestions, practiceSession, submittedQuestionIds });
 });
 
 // user answer post route
-app.post("/submit/question/:questionId/:practiceSessionId", async(req,res)=>{
-    const {questionId,practiceSessionId} = req.params;
-    const ans = req.body;
+app.post("/submit/question/:questionId/:practiceSessionId", async (req, res) => {
+  const { questionId, practiceSessionId } = req.params;
+  const ans = req.body;
 
 
-    const question = await Question.findOne({_id:questionId});
-    const practiceSession = await PracticeSession.findOne({_id:practiceSessionId});
+  const question = await Question.findOne({ _id: questionId });
+  const practiceSession = await PracticeSession.findOne({ _id: practiceSessionId });
 
-    const is_correct = question.correctAnswer===ans.correctAnswer;
-    let score=0;
-    is_correct ? score = 1 : score = 0;
+  const is_correct = question.correctAnswer === ans.correctAnswer;
+  let score = 0;
+  is_correct ? score = 1 : score = 0;
 
-    const alreadySubmitted = await Submission.exists({
-        userId: practiceSession.userId,
-        questionId,
-        sessionId: practiceSessionId
+  const alreadySubmitted = await Submission.exists({
+    userId: practiceSession.userId,
+    questionId,
+    sessionId: practiceSessionId
+  });
+
+  if (!alreadySubmitted) {
+    await Submission.create({
+      userId: practiceSession.userId,
+      questionId,
+      sessionId: practiceSessionId,
+      userAnswer: ans.correctAnswer,
+      isCorrect: is_correct,
+      score
     });
-
-    if(!alreadySubmitted){
-        await Submission.create({
-            userId: practiceSession.userId,
-            questionId,
-            sessionId: practiceSessionId,
-            userAnswer: ans.correctAnswer,
-            isCorrect: is_correct,
-            score
-        });
-    }
-    res.redirect(`/take-quiz/${practiceSessionId}`);
+  }
+  res.redirect(`/take-quiz/${practiceSessionId}`);
 });
 
 // server setup
 app.listen(port, () => {
-    console.log(`Server is running on http://localhost:${port}`);
+  console.log(`Server is running on http://localhost:${port}`);
 });

@@ -6,97 +6,157 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>sign-up Page.</title>
     <style>
-        body {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            font-family: Arial, sans-serif;
-            background-color: #f9f9f9;
-            padding: 50px;
-        }
+        :root {
+    --primary: #4A90E2;
+    --primary-dark: #357ABD;
+    --accent: #7ca8da;
+    --danger: #ef4444;
+    --bg: #f4f6fb;
+    --card-bg: #ffffff;
+    --text-dark: #1f2933;
+    --text-light: #6b7280;
+    --border: #e5e7eb;
+    --shadow: 0 20px 45px rgba(0, 0, 0, 0.12);
+}
 
-        #sign-up-form {
-            width: 50vw;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            flex-direction: column;
-            gap: 2.5vh;
-            background: linear-gradient(45deg, rgb(143 137 137), transparent);
-            padding: 5%;
-            border-radius: 5px;
-            min-width: 350px;
-        }
+* {
+    box-sizing: border-box;
+}
 
-        #sign-up-form .box {
-            display: flex;
-            flex-direction: row;
-            gap: 20%;
-            margin-bottom: 15px;
-            width: 60%;
-            min-width: 300px;
-        }
+body {
+    min-height: 100vh;
+    margin: 0;
+    padding: 60px 20px;
+    font-family: "Inter", "Segoe UI", Arial, sans-serif;
+    background: linear-gradient(135deg, #eef2ff, #f9fafb);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    color: var(--text-dark);
+}
 
-        #sign-up-form label {
-            display: flex;
-            align-items: center;
-            justify-content: flex-end;
-            width: 40%;
-            font-size: 1.2rem;
-        }
+/* Page title */
+h1 {
+    margin-bottom: 35px;
+    font-size: 2.2rem;
+    font-weight: 600;
+}
 
-        #sign-up-form input {
-            width: 60%;
-            height: 4vh;
-            align-items: center;
-            font-size: 1.2rem;
-            border-radius: 5px;
-            padding: 1%;
-            border: none;
-        }
+/* Sign-up card */
+#sign-up-form {
+    width: 100%;
+    max-width: 520px;
+    padding: 40px 35px;
+    background: linear-gradient(
+        145deg,
+        rgba(255, 255, 255, 0.9),
+        rgba(240, 244, 255, 0.9)
+    );
+    border-radius: 18px;
+    box-shadow: var(--shadow);
+    display: flex;
+    flex-direction: column;
+    gap: 26px;
+    animation: fadeIn 0.5s ease;
+}
 
-        #sign-up-form input:focus {
-            border: none;
-            outline: 2px solid #4A90E2;
-            background-color: white;
-        }
+/* Input rows */
+#sign-up-form .box {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
 
-        #sign-up-btn {
-            width: 16%;
-            height: 5.5vh;
-            font-size: 1.2rem;
-            border-radius: 8px;
-            background-color: #7ca8da;
-            color: #292222;
-            border: none;
-            cursor: pointer;
-            min-width: 100px;
-            transition: 0.5s;
-        }
+/* Labels */
+#sign-up-form label {
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: var(--text-light);
+    text-transform: capitalize;
+}
 
-        #sign-up-btn:hover {
-            background-color: #357ABD;
-            color: white;
-            scale: 1.04;
-            box-shadow: 1px 1px 1px black;
-        }
+/* Inputs */
+#sign-up-form input {
+    width: 100%;
+    height: 44px;
+    font-size: 1rem;
+    border-radius: 10px;
+    padding: 10px 14px;
+    border: 1px solid var(--border);
+    transition: border 0.2s ease, box-shadow 0.2s ease;
+}
 
-        #logout-link {
-            background-color: #ff4d4d;
-            float: right;
-            padding: 8px 12px;
-            border-radius: 5px;
-            text-decoration: none;
-            color: white;
-            font-size: 1rem;
-            position: absolute;
-            top: 20px;
-            right: 20px;
-        }
+#sign-up-form input:focus {
+    outline: none;
+    border: 1px solid var(--primary);
+    box-shadow: 0 0 0 3px rgba(74, 144, 226, 0.2);
+    background-color: white;
+}
 
-        #logout-link:hover {
-            background-color: #e60000;
-        }
+/* Submit button */
+#sign-up-btn {
+    margin-top: 10px;
+    width: 100%;
+    height: 50px;
+    font-size: 1.05rem;
+    font-weight: 600;
+    border-radius: 14px;
+    background: linear-gradient(135deg, var(--accent), var(--primary));
+    color: white;
+    border: none;
+    cursor: pointer;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+#sign-up-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 12px 25px rgba(74, 144, 226, 0.45);
+}
+
+/* Back to login */
+#logout-link {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    background: linear-gradient(135deg, var(--danger), #dc2626);
+    padding: 8px 14px;
+    border-radius: 12px;
+    text-decoration: none;
+    color: white;
+    font-size: 0.9rem;
+    font-weight: 600;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+#logout-link:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 10px 20px rgba(239, 68, 68, 0.4);
+}
+
+/* Animations */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(15px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Mobile */
+@media (max-width: 500px) {
+    h1 {
+        font-size: 1.8rem;
+    }
+
+    #sign-up-form {
+        padding: 30px 24px;
+    }
+}
+
     </style>
 </head>
 

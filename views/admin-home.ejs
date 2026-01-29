@@ -6,44 +6,111 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>admin-home-page</title>
     <style>
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #f0f0f0;
-            padding: 20px;
-        }
+        :root {
+    --primary: #4A90E2;
+    --primary-dark: #357ABD;
+    --danger: #ff4d4d;
+    --danger-dark: #e60000;
+    --bg: #f4f6fb;
+    --card-bg: #ffffff;
+    --text-dark: #1f2933;
+    --text-light: #6b7280;
+    --shadow: 0 20px 40px rgba(0, 0, 0, 0.08);
+}
 
-        h1 {
-            color: #333;
-        }
+* {
+    box-sizing: border-box;
+}
 
-        a {
-            display: inline-block;
-            margin: 10px 0;
-            padding: 10px 15px;
-            background-color: #4A90E2;
-            color: white;
-            text-decoration: none;
-            border-radius: 5px;
-        }
+body {
+    font-family: "Inter", "Segoe UI", Arial, sans-serif;
+    background: linear-gradient(135deg, #eef2ff, #f9fafb);
+    min-height: 100vh;
+    margin: 0;
+    padding: 40px;
+    color: var(--text-dark);
+}
 
-        a:hover {
-            background-color: #357ABD;
-        }
-        #logout-link {
-            background-color: #ff4d4d;
-            float: right;
-            padding: 8px 12px;
-            border-radius: 5px;
-            text-decoration: none;
-            color: white;
-            font-size: 1rem;
-            position: absolute;
-            top: 20px;
-            right: 20px;
-        }
-        #logout-link:hover {
-            background-color: #e60000;
-        }
+/* Header */
+h1 {
+    font-size: 2rem;
+    font-weight: 600;
+    margin-bottom: 30px;
+}
+
+/* Main container */
+div {
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
+}
+
+/* Admin action buttons */
+a {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 180px;
+    padding: 14px 20px;
+    background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+    color: white;
+    text-decoration: none;
+    border-radius: 12px;
+    font-size: 1rem;
+    font-weight: 600;
+    letter-spacing: 0.3px;
+    box-shadow: var(--shadow);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+a:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 30px 50px rgba(74, 144, 226, 0.25);
+}
+
+/* Logout button */
+#logout-link {
+    position: absolute;
+    top: 25px;
+    right: 25px;
+    background: linear-gradient(135deg, var(--danger), var(--danger-dark));
+    padding: 10px 16px;
+    border-radius: 10px;
+    font-size: 0.95rem;
+    font-weight: 600;
+    box-shadow: 0 10px 25px rgba(255, 77, 77, 0.35);
+}
+
+#logout-link:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 20px 35px rgba(255, 77, 77, 0.45);
+}
+
+/* Responsive */
+@media (max-width: 600px) {
+    body {
+        padding: 25px;
+    }
+
+    h1 {
+        font-size: 1.6rem;
+    }
+
+    div {
+        flex-direction: column;
+    }
+
+    a {
+        width: 100%;
+    }
+
+    #logout-link {
+        position: static;
+        margin-bottom: 20px;
+        align-self: flex-end;
+    }
+}
+
     </style>
 </head>
 

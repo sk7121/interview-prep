@@ -6,147 +6,228 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login Page</title>
     <style>
-        body {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            font-family: Arial, sans-serif;
-            background-color: #f9f9f9;
-            padding: 50px;
-        }
+        :root {
+    --primary: #4A90E2;
+    --primary-dark: #357ABD;
+    --secondary: #7b5fc0;
+    --bg: #f4f6fb;
+    --card-bg: #ffffff;
+    --text-dark: #1f2933;
+    --text-light: #6b7280;
+    --border: #e5e7eb;
+    --shadow: 0 20px 40px rgba(0, 0, 0, 0.12);
+}
 
-        #login-form {
-            width: 50vw;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            flex-direction: column;
-            gap: 2.5vh;
-        }
+* {
+    box-sizing: border-box;
+}
 
-        #login-form .box {
-            display: flex;
-            flex-direction: row;
-            gap: 20%;
-            margin-bottom: 15px;
-            width: 60%;
-            min-width: 300px;
-        }
+body {
+    min-height: 100vh;
+    margin: 0;
+    padding: 0;
+    font-family: "Inter", "Segoe UI", Arial, sans-serif;
+    background: linear-gradient(135deg, #eef2ff, #f9fafb);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    color: var(--text-dark);
+}
 
-        #login-form label {
-            display: flex;
-            align-items: center;
-            justify-content: flex-end;
-            width: 40%;
-            font-size: 1.2rem;
-        }
+/* Page title */
+h1 {
+    margin-bottom: 30px;
+    font-size: 2.1rem;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+}
 
-        #login-form input {
-            width: 60%;
-            height: 4vh;
-            align-items: center;
-            font-size: 1.2rem;
-            border-radius: 5px;
-            padding: 1%;
-            border: none;
-        }
+/* Admin login shortcut */
+#admin-form {
+    position: absolute;
+    top: 25px;
+    right: 25px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+    padding: 10px;
+    border-radius: 12px;
+    background: rgba(255, 255, 255, 0.7);
+    backdrop-filter: blur(6px);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
 
-        #login-form input:focus {
-            border: none;
-            outline: 2px solid #4A90E2;
-            background-color: white;
-        }
+#admin-form:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 18px 35px rgba(0, 0, 0, 0.15);
+}
 
-        #login-btn {
-            width: 16%;
-            height: 5.5vh;
-            align-self: center;
-            cursor: pointer;
-            padding: 1%;
-            border-radius: 5px;
-            background-color: #d2c6f1;
-            border: none;
-            min-width: 100px;
-            transition: 0.5s;
-        }
+/* Admin link */
+#admin-btn {
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: #54808C;
+    text-decoration: none;
+    transition: color 0.2s ease;
+}
 
-        #login-btn:hover {
-            background-color: #7b5fc0;
-            color: white;
-            box-shadow: 1px 1px 1px black;
-        }
+#admin-btn:hover {
+    color: #fa4343;
+    text-decoration: underline;
+}
 
-        h1 {
-            margin-bottom: 10vh;
-            text-decoration: underline;
-        }
+/* Login card */
+#login-container {
+    width: 50vw;
+    max-width: 480px;
+    min-width: 360px;
+    padding: 35px 30px;
+    background: var(--card-bg);
+    border-radius: 16px;
+    box-shadow: var(--shadow);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 22px;
+    animation: fadeIn 0.5s ease;
+}
 
-        #admin-btn {
-            font-size: large;
-            background: none;
-            border: none;
-            cursor: pointer;
-            color: rgb(84, 128, 140);
-            transition: 0.5s;
-            text-decoration: none;
-        }
+/* Form */
+#login-form {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+}
 
-        #admin-btn:hover {
-            color: rgb(250, 67, 67);
-            border-radius: 10px;
-            padding: 1px;
-            text-decoration: underline;
+/* Form rows */
+#login-form .box {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+}
 
-        }
+/* Labels */
+#login-form label {
+    width: 35%;
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: var(--text-light);
+    text-align: right;
+}
 
-        #admin-form {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            position: absolute;
-            right: 5px;
-            background-color: transparent;
-            padding: 1%;
-            min-width: 100px;
-            border-radius: 8%;
-            transition: 0.5s;
-        }
+/* Inputs */
+#login-form input {
+    flex: 1;
+    padding: 10px 12px;
+    font-size: 0.95rem;
+    border-radius: 8px;
+    border: 1px solid var(--border);
+    outline: none;
+    transition: border 0.2s ease, box-shadow 0.2s ease;
+}
 
-        #admin-form:hover {
-            scale: 1.04;
-            background-color: #d4e9eb;
-        }
+#login-form input:focus {
+    border-color: var(--primary);
+    box-shadow: 0 0 0 3px rgba(74, 144, 226, 0.15);
+}
 
-        #signup-btn {
-            font-size: medium;
-            background: none;
-            border: none;
-            cursor: pointer;
-            color: #4A90E2;
-            border-radius: 5px;
-            padding: 1px;
-            transition: 0.5s;
-        }
+/* Login button */
+#login-btn {
+    margin-top: 10px;
+    align-self: center;
+    width: 140px;
+    height: 42px;
+    font-size: 1rem;
+    font-weight: 600;
+    border-radius: 10px;
+    background: linear-gradient(135deg, var(--secondary), var(--primary));
+    color: white;
+    border: none;
+    cursor: pointer;
+    letter-spacing: 0.3px;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
 
-        #signup-btn:hover {
-            text-decoration: underline;
-            box-shadow: 1px 1px 1px black;
-        }
+#login-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 15px 30px rgba(123, 95, 192, 0.35);
+}
 
-        #login-container {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 3vh;
-            padding: 5%;
-            border-radius: 5px;
-            min-width: 350px;
-            background: linear-gradient(45deg, rgb(143 137 137), transparent);
-        }
+#login-btn:active {
+    transform: translateY(0);
+    box-shadow: none;
+}
 
-        #boy-image {
-            position: absolute;
-        }
+/* Signup section */
+p {
+    margin: 0;
+    font-size: 0.9rem;
+    color: var(--text-light);
+}
+
+#signup-btn {
+    background: none;
+    border: none;
+    padding: 0;
+    margin-left: 4px;
+    cursor: pointer;
+    font-size: 0.9rem;
+}
+
+#signup-btn a {
+    color: var(--primary);
+    text-decoration: none;
+    font-weight: 600;
+}
+
+#signup-btn a:hover {
+    text-decoration: underline;
+}
+
+/* Animations */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(12px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Responsive */
+@media (max-width: 600px) {
+    h1 {
+        font-size: 1.7rem;
+    }
+
+    #login-container {
+        width: 90vw;
+        min-width: unset;
+        padding: 28px 22px;
+    }
+
+    #login-form .box {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    #login-form label {
+        width: 100%;
+        text-align: left;
+    }
+
+    #admin-form {
+        position: static;
+        margin-bottom: 20px;
+    }
+}
+
     </style>
 </head>
 

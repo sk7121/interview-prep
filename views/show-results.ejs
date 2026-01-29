@@ -6,61 +6,136 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>show questions</title>
     <style>
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #f0f0f0;
-            padding: 20px;
-            display: flex;
-            flex-direction: column;
-            align-items: flex-start;
-        }
+        :root {
+    --primary: #4A90E2;
+    --primary-dark: #357ABD;
+    --danger: #ef4444;
+    --bg: #f4f6fb;
+    --card-bg: #ffffff;
+    --text-dark: #1f2933;
+    --text-light: #6b7280;
+    --border: #e5e7eb;
+    --shadow: 0 18px 40px rgba(0, 0, 0, 0.1);
+}
 
-        #link {
-            text-decoration: none;
-            font-size: 1.2rem;
-            margin-bottom: 20px;
-            display: inline-block;
-        }
+* {
+    box-sizing: border-box;
+}
 
-        #link:hover {
-            text-decoration: underline;
-            color: #357ABD;
-        }
+body {
+    min-height: 100vh;
+    margin: 0;
+    padding: 30px 20px;
+    font-family: "Inter", "Segoe UI", Arial, sans-serif;
+    background: linear-gradient(135deg, #eef2ff, #f9fafb);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    color: var(--text-dark);
+}
 
-        .box {
-            width: 40vw;
-            margin-bottom: 15px;
-            padding: 1.5% 10%;
-            background-color: #e0e0e0;
-            border-radius: 5px;
-            border: 1px solid black;
-            min-width: 260px;
-            display: flex;
-            flex-direction: column;
-            justify-content: flex-start;
-        }
+/* Page title */
+h1 {
+    margin-bottom: 10px;
+    font-size: 2rem;
+    font-weight: 600;
+}
 
-        .container {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            min-width: 100%;
-        }
+/* Back link */
+#link {
+    align-self: flex-start;
+    margin-bottom: 30px;
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--primary);
+    text-decoration: none;
+}
 
-        #show-btn {
-            text-decoration: none;
-            font-size: 1rem;
-            margin-bottom: 10px;
-            display: inline-block;
-            background-color: #ff4d4d;
-            color: white;
-            padding: 5px 10px;
-            border-radius: 5px;
-            width: 130px;
-            text-align: center;
-            align-self: flex-end;
-        }
+#link:hover {
+    text-decoration: underline;
+}
+
+/* Container */
+.container {
+    width: 100%;
+    max-width: 900px;
+    display: flex;
+    flex-direction: column;
+    gap: 22px;
+}
+
+/* Result card */
+.box {
+    width: 100%;
+    padding: 22px 26px;
+    background: var(--card-bg);
+    border-radius: 16px;
+    border: 1px solid var(--border);
+    box-shadow: var(--shadow);
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    animation: fadeIn 0.4s ease;
+}
+
+/* Show result button */
+#show-btn {
+    align-self: flex-end;
+    text-decoration: none;
+    font-size: 0.85rem;
+    font-weight: 600;
+    padding: 7px 14px;
+    border-radius: 10px;
+    background: linear-gradient(135deg, var(--danger), #dc2626);
+    color: white;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+#show-btn:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 8px 18px rgba(239, 68, 68, 0.4);
+}
+
+/* Card text */
+.box h3 {
+    margin: 6px 0 8px;
+    font-size: 1rem;
+    font-weight: 600;
+}
+
+.box p {
+    margin: 0;
+    font-size: 0.92rem;
+    color: var(--text-light);
+}
+
+.box strong {
+    color: var(--text-dark);
+}
+
+/* Animation */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Responsive */
+@media (max-width: 600px) {
+    h1 {
+        font-size: 1.6rem;
+    }
+
+    .box {
+        padding: 18px 20px;
+    }
+}
+
     </style>
 </head>
 

@@ -6,72 +6,144 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>quiz-question</title>
     <style>
-        form {
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            gap: 3rem;
-        }
+        :root {
+    --primary: #4A90E2;
+    --primary-dark: #357ABD;
+    --option-bg: #ecf4ff;
+    --option-hover: #dbeafe;
+    --question-bg: #eef5ff;
+    --text-dark: #1f2933;
+    --shadow: 0 20px 40px rgba(0, 0, 0, 0.12);
+}
 
-        #ques {
-            font-family: sans-serif;
-            font-size: 2rem;
-            font-style: italic;
-            font-weight: bolder;
-            padding: 1rem 1rem;
-            border-radius: 10px;
-            background-color: rgb(182 211 231);
-            box-shadow: 1px 1px 1px blue;
-            color: #2475e9;
-        }
+* {
+    box-sizing: border-box;
+}
 
-        #mcq {
-            display: flex;
-            flex-direction: column;
-            justify-content: space-around;
-            align-items: center;
-            width: 90%;
-        }
+body {
+    min-height: 100vh;
+    margin: 0;
+    padding: 30px 20px;
+    font-family: "Inter", "Segoe UI", Arial, sans-serif;
+    background: linear-gradient(135deg, #eef2ff, #f9fafb);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    color: var(--text-dark);
+}
 
-        .row {
-            display: flex;
-            flex-direction: row;
-            justify-content: space-around;
-            align-items: center;
-            width: 100%;
-            gap: 1rem;
-        }
+/* Page title */
+h1 {
+    margin-bottom: 25px;
+    font-size: 2rem;
+    font-weight: 600;
+}
 
-        .col {
-            font-family: sans-serif;
-            font-size: larger;
-            font-style: italic;
-            font-weight: bold;
-            border-radius: 10px;
-            color: black;
-            flex-direction: row;
-            justify-content: center;
-            align-items: center;
-            min-width: 30vw;
-            margin-top: 5rem;
-            background-color: rgb(180, 220, 207);
-            cursor: pointer;
-            border: none;
-            transition: 0.6s;
-            display: flex;
-            flex-wrap: wrap;
-            padding: 10px;
-        }
+/* Form layout */
+form {
+    width: 100%;
+    max-width: 900px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 40px;
+}
 
-        .col:hover {
-            scale: 1.04;
-            background-color: aquamarine;
-        }
+/* Question box */
+#ques {
+    width: 100%;
+    padding: 25px 30px;
+    font-size: 1.6rem;
+    font-weight: 600;
+    font-style: italic;
+    border-radius: 16px;
+    background: linear-gradient(135deg, var(--question-bg), #ffffff);
+    color: var(--primary-dark);
+    box-shadow: var(--shadow);
+    text-align: center;
+    animation: fadeIn 0.5s ease;
+}
 
-        .value {
-            font-size: large;
-        }
+/* Options container */
+#mcq {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 28px;
+}
+
+/* Row */
+.row {
+    display: flex;
+    justify-content: space-between;
+    gap: 22px;
+}
+
+/* Option button */
+.col {
+    flex: 1;
+    min-height: 90px;
+    padding: 18px 20px;
+    font-size: 1.05rem;
+    font-weight: 600;
+    border-radius: 16px;
+    background: var(--option-bg);
+    color: var(--text-dark);
+    cursor: pointer;
+    border: none;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.08);
+    transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
+}
+
+.col:hover {
+    transform: translateY(-3px);
+    background: var(--option-hover);
+    box-shadow: 0 18px 35px rgba(74, 144, 226, 0.25);
+}
+
+.col:active {
+    transform: translateY(0);
+    box-shadow: 0 10px 20px rgba(74, 144, 226, 0.2);
+}
+
+/* Option letter */
+.value {
+    font-size: 1.3rem;
+    font-weight: 700;
+    color: var(--primary);
+}
+
+/* Animation */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(12px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Responsive */
+@media (max-width: 700px) {
+    #ques {
+        font-size: 1.3rem;
+        padding: 20px;
+    }
+
+    .row {
+        flex-direction: column;
+    }
+
+    .col {
+        width: 100%;
+    }
+}
+
     </style>
 </head>
 

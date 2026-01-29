@@ -14,10 +14,13 @@
   "description": "",
   "dependencies": {
     "bcrypt": "^6.0.0",
+    "connect-mongo": "^6.0.0",
     "dotenv": "^17.2.3",
     "ejs-mate": "^4.0.0",
     "express": "^5.2.1",
+    "express-session": "^1.19.0",
     "mongoose": "^9.0.2",
+    "openai": "^6.17.0",
     "path": "^0.12.7"
   }
 }
