@@ -2,193 +2,193 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>quiz-question</title>
-    <style>
-        :root {
-    --primary: #4A90E2;
-    --primary-dark: #357ABD;
-    --option-bg: #ecf4ff;
-    --option-hover: #dbeafe;
-    --question-bg: #eef5ff;
-    --text-dark: #1f2933;
-    --shadow: 0 20px 40px rgba(0, 0, 0, 0.12);
-}
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>quiz-question</title>
+  <style>
+    :root {
+      --primary: #4A90E2;
+      --primary-dark: #357ABD;
+      --option-bg: #ecf4ff;
+      --option-hover: #dbeafe;
+      --question-bg: #eef5ff;
+      --text-dark: #1f2933;
+      --shadow: 0 20px 40px rgba(0, 0, 0, 0.12);
+    }
 
-* {
-    box-sizing: border-box;
-}
+    * {
+      box-sizing: border-box;
+    }
 
-body {
-    min-height: 100vh;
-    margin: 0;
-    padding: 30px 20px;
-    font-family: "Inter", "Segoe UI", Arial, sans-serif;
-    background: linear-gradient(135deg, #eef2ff, #f9fafb);
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    color: var(--text-dark);
-}
+    body {
+      min-height: 100vh;
+      margin: 0;
+      padding: 30px 20px;
+      font-family: "Inter", "Segoe UI", Arial, sans-serif;
+      background: linear-gradient(135deg, #eef2ff, #f9fafb);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      color: var(--text-dark);
+    }
 
-/* Page title */
-h1 {
-    margin-bottom: 25px;
-    font-size: 2rem;
-    font-weight: 600;
-}
+    /* Page title */
+    h1 {
+      margin-bottom: 25px;
+      font-size: 2rem;
+      font-weight: 600;
+    }
 
-/* Form layout */
-form {
-    width: 100%;
-    max-width: 900px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 40px;
-}
+    /* Form layout */
+    form {
+      width: 100%;
+      max-width: 900px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 40px;
+    }
 
-/* Question box */
-#ques {
-    width: 100%;
-    padding: 25px 30px;
-    font-size: 1.6rem;
-    font-weight: 600;
-    font-style: italic;
-    border-radius: 16px;
-    background: linear-gradient(135deg, var(--question-bg), #ffffff);
-    color: var(--primary-dark);
-    box-shadow: var(--shadow);
-    text-align: center;
-    animation: fadeIn 0.5s ease;
-}
+    /* Question box */
+    #ques {
+      width: 100%;
+      padding: 25px 30px;
+      font-size: 1.6rem;
+      font-weight: 600;
+      font-style: italic;
+      border-radius: 16px;
+      background: linear-gradient(135deg, var(--question-bg), #ffffff);
+      color: var(--primary-dark);
+      box-shadow: var(--shadow);
+      text-align: center;
+      animation: fadeIn 0.5s ease;
+    }
 
-/* Options container */
-#mcq {
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    gap: 28px;
-}
+    /* Options container */
+    #mcq {
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      gap: 28px;
+    }
 
-/* Row */
-.row {
-    display: flex;
-    justify-content: space-between;
-    gap: 22px;
-}
+    /* Row */
+    .row {
+      display: flex;
+      justify-content: space-between;
+      gap: 22px;
+    }
 
-/* Option button */
-.col {
-    flex: 1;
-    min-height: 90px;
-    padding: 18px 20px;
-    font-size: 1.05rem;
-    font-weight: 600;
-    border-radius: 16px;
-    background: var(--option-bg);
-    color: var(--text-dark);
-    cursor: pointer;
-    border: none;
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.08);
-    transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
-}
+    /* Option button */
+    .col {
+      flex: 1;
+      min-height: 90px;
+      padding: 18px 20px;
+      font-size: 1.05rem;
+      font-weight: 600;
+      border-radius: 16px;
+      background: var(--option-bg);
+      color: var(--text-dark);
+      cursor: pointer;
+      border: none;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.08);
+      transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
+    }
 
-.col:hover {
-    transform: translateY(-3px);
-    background: var(--option-hover);
-    box-shadow: 0 18px 35px rgba(74, 144, 226, 0.25);
-}
+    .col:hover {
+      transform: translateY(-3px);
+      background: var(--option-hover);
+      box-shadow: 0 18px 35px rgba(74, 144, 226, 0.25);
+    }
 
-.col:active {
-    transform: translateY(0);
-    box-shadow: 0 10px 20px rgba(74, 144, 226, 0.2);
-}
+    .col:active {
+      transform: translateY(0);
+      box-shadow: 0 10px 20px rgba(74, 144, 226, 0.2);
+    }
 
-/* Option letter */
-.value {
-    font-size: 1.3rem;
-    font-weight: 700;
-    color: var(--primary);
-}
+    /* Option letter */
+    .value {
+      font-size: 1.3rem;
+      font-weight: 700;
+      color: var(--primary);
+    }
 
-/* Animation */
-@keyframes fadeIn {
-    from {
+    /* Animation */
+    @keyframes fadeIn {
+      from {
         opacity: 0;
         transform: translateY(12px);
-    }
-    to {
+      }
+
+      to {
         opacity: 1;
         transform: translateY(0);
+      }
     }
-}
 
-/* Responsive */
-@media (max-width: 700px) {
-    #ques {
+    /* Responsive */
+    @media (max-width: 700px) {
+      #ques {
         font-size: 1.3rem;
         padding: 20px;
-    }
+      }
 
-    .row {
+      .row {
         flex-direction: column;
-    }
+      }
 
-    .col {
+      .col {
         width: 100%;
+      }
     }
-}
-
-    </style>
+  </style>
 </head>
 
 <body>
-    <h1>Quiz-Question</h1>
-    <% if (question && practiceSession) { %>
-        <form action="/submit/question/<%=question._id%>/<%=practiceSession._id%>" method="post">
+  <h1>Quiz-Question</h1>
+  <% if (question && practiceSession) { %>
+  <form action="/submit/question/<%=question._id%>/<%=practiceSession._id%>" method="post">
 
-            <div id="ques"> Question >><%=question.questionText%>
-            </div>
-            <div id="mcq">
-                <div class="row">
-                    <button class="col" onclick="set_value(this)">
-                        option <h2 class="value">A</h2>: <%=question.optionA%>
-                    </button>
-                    <button class="col" onclick="set_value(this)">
-                        option <h2 class="value">B</h2>: <%=question.optionB%>
-                    </button>
+    <div id="ques"> Question >><%=question.questionText%>
+    </div>
+    <div id="mcq">
+      <div class="row">
+        <button class="col" onclick="set_value(this)">
+          option <h2 class="value">A</h2>: <%=question.optionA%>
+        </button>
+        <button class="col" onclick="set_value(this)">
+          option <h2 class="value">B</h2>: <%=question.optionB%>
+        </button>
 
-                </div>
-                <div class="row">
-                    <button class="col" onclick="set_value(this)">
-                        option <h2 class="value">C</h2>: <%=question.optionC%>
-                    </button>
-                    <button class="col" onclick="set_value(this)">
-                        option <h2 class="value">D</h2>: <%=question.optionD%>
-                    </button>
-                </div>
-                <input type="text" name="correctAnswer" value="" id="correctAnswer" style="display: none;">
-            </div>
+      </div>
+      <div class="row">
+        <button class="col" onclick="set_value(this)">
+          option <h2 class="value">C</h2>: <%=question.optionC%>
+        </button>
+        <button class="col" onclick="set_value(this)">
+          option <h2 class="value">D</h2>: <%=question.optionD%>
+        </button>
+      </div>
+      <input type="text" name="userAnswer" value="" id="correctAnswer" style="display: none;">
+    </div>
 
-        </form>
+  </form>
 
-        <% } else { %>
-            <p>Something went wrong.</p>
-            <% } %>
+  <% } else { %>
+  <p>Something went wrong.</p>
+  <% } %>
 
-                <script>
-                    let input = document.getElementById("correctAnswer");
+  <script>
+    let input = document.getElementById("correctAnswer");
 
-                    function set_value(el) {
-                        let valueEl = el.querySelector(".value");
-                        input.value = valueEl.innerText;
-                    }
-                </script>
+    function set_value(el) {
+      let valueEl = el.querySelector(".value");
+      input.value = valueEl.innerText;
+    }
+  </script>
 </body>
 
 </html>

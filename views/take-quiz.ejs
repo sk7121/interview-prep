@@ -2,200 +2,199 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Take Quiz</title>
-    <style>
-        :root {
-    --primary: #3b82f6;
-    --primary-dark: #2563eb;
-    --success: #22c55e;
-    --warning: #f59e0b;
-    --muted: #9ca3af;
-    --bg: #f4f7fb;
-    --card-bg: #ffffff;
-    --border: #e5e7eb;
-    --shadow: 0 15px 35px rgba(0, 0, 0, 0.12);
-}
-
-* {
-    box-sizing: border-box;
-}
-
-body {
-    margin: 0;
-    min-height: 100vh;
-    padding: 50px 20px;
-    font-family: "Inter", "Segoe UI", Arial, sans-serif;
-    background: linear-gradient(135deg, #eef2ff, #f8fafc);
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    color: #111827;
-}
-
-/* Page title */
-h1 {
-    margin-bottom: 30px;
-    font-size: 2.2rem;
-    font-weight: 600;
-}
-
-/* Main container */
-.container {
-    width: 100%;
-    max-width: 760px;
-    min-width: 320px;
-    display: flex;
-    flex-direction: column;
-    gap: 18px;
-}
-
-/* Question card */
-.box {
-    padding: 18px 20px;
-    background: linear-gradient(135deg, #ffffff, #f1f5f9);
-    border-radius: 14px;
-    border: 1px solid var(--border);
-    box-shadow: var(--shadow);
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 20px;
-    transition: transform 0.2s ease, box-shadow 0.2s ease;
-}
-
-.box:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 20px 45px rgba(0, 0, 0, 0.15);
-}
-
-/* Question text */
-.box p {
-    margin: 0;
-    font-size: 1rem;
-    line-height: 1.5;
-    flex: 1;
-}
-
-/* Submitted state */
-.disabled-link {
-    font-weight: 600;
-    color: var(--success);
-    background-color: rgba(34, 197, 94, 0.12);
-    padding: 8px 14px;
-    border-radius: 999px;
-    cursor: default;
-}
-
-/* Expand link */
-#expand-link {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    text-decoration: none;
-    font-weight: 600;
-    font-size: 0.95rem;
-    color: var(--primary);
-    padding: 8px 12px;
-    border-radius: 10px;
-    transition: background-color 0.2s ease, transform 0.2s ease;
-}
-
-#expand-link:hover {
-    background-color: rgba(59, 130, 246, 0.15);
-    transform: scale(1.05);
-}
-
-/* Expand icon */
-.icon {
-    display: flex;
-    align-items: center;
-    gap: 6px;
-}
-
-/* Divider */
-hr {
-    border: none;
-    border-top: 1px dashed var(--border);
-    margin: 6px 0;
-}
-
-/* Submit quiz button */
-#submit {
-    margin-top: 25px;
-    align-self: flex-end;
-    width: 100%;
-    max-width: 220px;
-    height: 52px;
-    border-radius: 14px;
-    border: none;
-    background: linear-gradient(135deg, var(--primary), var(--primary-dark));
-    color: white;
-    font-size: 1.05rem;
-    font-weight: 600;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    text-decoration: none;
-    transition: transform 0.2s ease, box-shadow 0.2s ease;
-}
-
-#submit:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 14px 30px rgba(37, 99, 235, 0.5);
-}
-
-/* Mobile tweaks */
-@media (max-width: 600px) {
-    h1 {
-        font-size: 1.8rem;
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Take Quiz</title>
+  <style>
+    :root {
+      --primary: #3b82f6;
+      --primary-dark: #2563eb;
+      --success: #22c55e;
+      --warning: #f59e0b;
+      --muted: #9ca3af;
+      --bg: #f4f7fb;
+      --card-bg: #ffffff;
+      --border: #e5e7eb;
+      --shadow: 0 15px 35px rgba(0, 0, 0, 0.12);
     }
 
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      padding: 50px 20px;
+      font-family: "Inter", "Segoe UI", Arial, sans-serif;
+      background: linear-gradient(135deg, #eef2ff, #f8fafc);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      color: #111827;
+    }
+
+    /* Page title */
+    h1 {
+      margin-bottom: 30px;
+      font-size: 2.2rem;
+      font-weight: 600;
+    }
+
+    /* Main container */
+    .container {
+      width: 100%;
+      max-width: 760px;
+      min-width: 320px;
+      display: flex;
+      flex-direction: column;
+      gap: 18px;
+    }
+
+    /* Question card */
     .box {
+      padding: 18px 20px;
+      background: linear-gradient(135deg, #ffffff, #f1f5f9);
+      border-radius: 14px;
+      border: 1px solid var(--border);
+      box-shadow: var(--shadow);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .box:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 20px 45px rgba(0, 0, 0, 0.15);
+    }
+
+    /* Question text */
+    .box p {
+      margin: 0;
+      font-size: 1rem;
+      line-height: 1.5;
+      flex: 1;
+    }
+
+    /* Submitted state */
+    .disabled-link {
+      font-weight: 600;
+      color: var(--success);
+      background-color: rgba(34, 197, 94, 0.12);
+      padding: 8px 14px;
+      border-radius: 999px;
+      cursor: default;
+    }
+
+    /* Expand link */
+    #expand-link {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 0.95rem;
+      color: var(--primary);
+      padding: 8px 12px;
+      border-radius: 10px;
+      transition: background-color 0.2s ease, transform 0.2s ease;
+    }
+
+    #expand-link:hover {
+      background-color: rgba(59, 130, 246, 0.15);
+      transform: scale(1.05);
+    }
+
+    /* Expand icon */
+    .icon {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    /* Divider */
+    hr {
+      border: none;
+      border-top: 1px dashed var(--border);
+      margin: 6px 0;
+    }
+
+    /* Submit quiz button */
+    #submit {
+      margin-top: 25px;
+      align-self: flex-end;
+      width: 100%;
+      max-width: 220px;
+      height: 52px;
+      border-radius: 14px;
+      border: none;
+      background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+      color: white;
+      font-size: 1.05rem;
+      font-weight: 600;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-decoration: none;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    #submit:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 14px 30px rgba(37, 99, 235, 0.5);
+    }
+
+    /* Mobile tweaks */
+    @media (max-width: 600px) {
+      h1 {
+        font-size: 1.8rem;
+      }
+
+      .box {
         flex-direction: column;
         align-items: flex-start;
-    }
+      }
 
-    #expand-link {
+      #expand-link {
         align-self: flex-end;
-    }
+      }
 
-    #submit {
+      #submit {
         width: 100%;
+      }
     }
-}
-
-    </style>
+  </style>
 </head>
 
 <body>
-    <h1>Take Quiz</h1>
-    <div class="container">
-        <% let index=0; %>
-            <% questions.forEach((question, index)=> { %>
-                <% const is_submitted=submittedQuestionIds.has(question._id.toString());%>
-                    <div class="box">
-                        <% if (is_submitted) { %>
-                            <span class="disabled-link">Already Submitted</span>
-                            <% } else{%>
-                                <p><strong>Question <%= index + 1 %>:</strong>
-                                    <%= question.questionText %>
-                                </p>
-                                <a href="/quiz/question/<%=question._id%>/<%=practiceSession._id%>" id="expand-link">
-                                    <div class="icon"><span>expand</span><svg xmlns="http://www.w3.org/2000/svg"
-                                            height="24px" viewBox="0 -960 960 960" width="24px" fill="#EA3323">
-                                            <path
-                                                d="M120-120v-200h80v120h120v80H120Zm520 0v-80h120v-120h80v200H640ZM120-640v-200h200v80H200v120h-80Zm640 0v-120H640v-80h200v200h-80Z" />
-                                        </svg></div>
-                                </a>
-                                <%}%>
-                    </div>
-                    <hr>
-                    <% index++; }); %>
-                        <a href="/submit/quiz/<%=practiceSession._id%>" id="submit">submit quiz</a>
+  <h1>Take Quiz</h1>
+  <div class="container">
+    <% let index=0; %>
+    <% questions.forEach((question, index)=> { %>
+    <% const is_submitted=submittedQuestionIds.has(question._id.toString());%>
+    <div class="box">
+      <p>
+        <strong>Question <%= index + 1 %>:</strong>
+        <%= question.questionText %>
+      </p>
+
+      <% if(is_submitted) { %>
+      <span class="disabled-link">Already Submitted</span>
+      <% } else { %>
+      <a href="/quiz/question/<%= question._id %>/<%=sessionId %>" id="expand-link">
+        <div class="icon">
+          <span>expand</span>
+        </div>
+      </a>
+      <% } %>
     </div>
+    <hr>
+    <% index++; }); %>
+    <a href="/submit/quiz/<%=sessionId%>" id="submit">submit quiz</a>
+  </div>
 </body>
 
 </html>

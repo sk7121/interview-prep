@@ -2,120 +2,119 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>user-home page</title>
-    <style>
-        :root {
-    --primary: #4A90E2;
-    --primary-dark: #357ABD;
-    --danger: #ef4444;
-    --bg: #f4f7fb;
-    --card-bg: #ffffff;
-    --text-dark: #1f2937;
-    --border: #e5e7eb;
-    --shadow: 0 18px 40px rgba(0, 0, 0, 0.12);
-}
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>user-home page</title>
+  <style>
+    :root {
+      --primary: #4A90E2;
+      --primary-dark: #357ABD;
+      --danger: #ef4444;
+      --bg: #f4f7fb;
+      --card-bg: #ffffff;
+      --text-dark: #1f2937;
+      --border: #e5e7eb;
+      --shadow: 0 18px 40px rgba(0, 0, 0, 0.12);
+    }
 
-* {
-    box-sizing: border-box;
-}
+    * {
+      box-sizing: border-box;
+    }
 
-body {
-    margin: 0;
-    min-height: 100vh;
-    padding: 40px 20px;
-    font-family: "Inter", "Segoe UI", Arial, sans-serif;
-    background: linear-gradient(135deg, #eef2ff, #f8fafc);
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    color: var(--text-dark);
-}
+    body {
+      margin: 0;
+      min-height: 100vh;
+      padding: 40px 20px;
+      font-family: "Inter", "Segoe UI", Arial, sans-serif;
+      background: linear-gradient(135deg, #eef2ff, #f8fafc);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      color: var(--text-dark);
+    }
 
-/* Page title */
-h1 {
-    margin-bottom: 40px;
-    font-size: 2.4rem;
-    font-weight: 600;
-}
-
-/* Main action container */
-div {
-    background: var(--card-bg);
-    padding: 40px 50px;
-    border-radius: 20px;
-    box-shadow: var(--shadow);
-    display: flex;
-    flex-direction: column;
-    gap: 25px;
-    min-width: 280px;
-    align-items: center;
-}
-
-/* Primary action buttons */
-a {
-    width: 220px;
-    text-align: center;
-    padding: 14px 18px;
-    font-size: 1.1rem;
-    font-weight: 600;
-    color: white;
-    background: linear-gradient(135deg, var(--primary), var(--primary-dark));
-    border-radius: 14px;
-    text-decoration: none;
-    transition: transform 0.2s ease, box-shadow 0.2s ease;
-}
-
-a:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 14px 30px rgba(74, 144, 226, 0.45);
-}
-
-/* Logout button */
-#logout-link {
-    position: absolute;
-    top: 20px;
-    right: 20px;
-    width: auto;
-    padding: 10px 16px;
-    font-size: 0.95rem;
-    font-weight: 600;
-    border-radius: 12px;
-    background: linear-gradient(135deg, #ef4444, #dc2626);
-    box-shadow: 0 8px 18px rgba(239, 68, 68, 0.35);
-}
-
-#logout-link:hover {
-    box-shadow: 0 12px 26px rgba(239, 68, 68, 0.5);
-}
-
-/* Responsive */
-@media (max-width: 600px) {
+    /* Page title */
     h1 {
+      margin-bottom: 40px;
+      font-size: 2.4rem;
+      font-weight: 600;
+    }
+
+    /* Main action container */
+    div {
+      background: var(--card-bg);
+      padding: 40px 50px;
+      border-radius: 20px;
+      box-shadow: var(--shadow);
+      display: flex;
+      flex-direction: column;
+      gap: 25px;
+      min-width: 280px;
+      align-items: center;
+    }
+
+    /* Primary action buttons */
+    a {
+      width: 220px;
+      text-align: center;
+      padding: 14px 18px;
+      font-size: 1.1rem;
+      font-weight: 600;
+      color: white;
+      background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+      border-radius: 14px;
+      text-decoration: none;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    a:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 14px 30px rgba(74, 144, 226, 0.45);
+    }
+
+    /* Logout button */
+    #logout-link {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      width: auto;
+      padding: 10px 16px;
+      font-size: 0.95rem;
+      font-weight: 600;
+      border-radius: 12px;
+      background: linear-gradient(135deg, #ef4444, #dc2626);
+      box-shadow: 0 8px 18px rgba(239, 68, 68, 0.35);
+    }
+
+    #logout-link:hover {
+      box-shadow: 0 12px 26px rgba(239, 68, 68, 0.5);
+    }
+
+    /* Responsive */
+    @media (max-width: 600px) {
+      h1 {
         font-size: 1.9rem;
         margin-bottom: 25px;
-    }
+      }
 
-    div {
+      div {
         padding: 30px 25px;
-    }
+      }
 
-    a {
+      a {
         width: 100%;
+      }
     }
-}
-
-    </style>
+  </style>
 </head>
 
 <body>
-    <h1>Welcome, <%=UserDetails.name.split(" ")[0]%>!</h1>
-    <div>
-        <a href="/query-page/<%=UserDetails._id%>">Take Quiz</a>
-        <a href="/view-scores/<%=UserDetails._id%>">View Scores</a>
-    </div>
-    <a href="/" id="logout-link">log out</a>
+  <h1>Welcome, <%=UserDetails.name.split(" ")[0]%>!</h1>
+  <div>
+    <a href="/query-page">Take Quiz</a>
+    <a href="/view-scores">View Scores</a>
+  </div>
+  <a href="/log-out" id="logout-link">log out</a>
 </body>
 
 </html>

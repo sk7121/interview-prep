@@ -2,126 +2,125 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>admin-home-page</title>
-    <style>
-        :root {
-    --primary: #4A90E2;
-    --primary-dark: #357ABD;
-    --danger: #ff4d4d;
-    --danger-dark: #e60000;
-    --bg: #f4f6fb;
-    --card-bg: #ffffff;
-    --text-dark: #1f2933;
-    --text-light: #6b7280;
-    --shadow: 0 20px 40px rgba(0, 0, 0, 0.08);
-}
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>admin-home-page</title>
+  <style>
+    :root {
+      --primary: #4A90E2;
+      --primary-dark: #357ABD;
+      --danger: #ff4d4d;
+      --danger-dark: #e60000;
+      --bg: #f4f6fb;
+      --card-bg: #ffffff;
+      --text-dark: #1f2933;
+      --text-light: #6b7280;
+      --shadow: 0 20px 40px rgba(0, 0, 0, 0.08);
+    }
 
-* {
-    box-sizing: border-box;
-}
+    * {
+      box-sizing: border-box;
+    }
 
-body {
-    font-family: "Inter", "Segoe UI", Arial, sans-serif;
-    background: linear-gradient(135deg, #eef2ff, #f9fafb);
-    min-height: 100vh;
-    margin: 0;
-    padding: 40px;
-    color: var(--text-dark);
-}
-
-/* Header */
-h1 {
-    font-size: 2rem;
-    font-weight: 600;
-    margin-bottom: 30px;
-}
-
-/* Main container */
-div {
-    display: flex;
-    gap: 20px;
-    flex-wrap: wrap;
-}
-
-/* Admin action buttons */
-a {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    min-width: 180px;
-    padding: 14px 20px;
-    background: linear-gradient(135deg, var(--primary), var(--primary-dark));
-    color: white;
-    text-decoration: none;
-    border-radius: 12px;
-    font-size: 1rem;
-    font-weight: 600;
-    letter-spacing: 0.3px;
-    box-shadow: var(--shadow);
-    transition: transform 0.2s ease, box-shadow 0.2s ease;
-}
-
-a:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 30px 50px rgba(74, 144, 226, 0.25);
-}
-
-/* Logout button */
-#logout-link {
-    position: absolute;
-    top: 25px;
-    right: 25px;
-    background: linear-gradient(135deg, var(--danger), var(--danger-dark));
-    padding: 10px 16px;
-    border-radius: 10px;
-    font-size: 0.95rem;
-    font-weight: 600;
-    box-shadow: 0 10px 25px rgba(255, 77, 77, 0.35);
-}
-
-#logout-link:hover {
-    transform: translateY(-1px);
-    box-shadow: 0 20px 35px rgba(255, 77, 77, 0.45);
-}
-
-/* Responsive */
-@media (max-width: 600px) {
     body {
-        padding: 25px;
+      font-family: "Inter", "Segoe UI", Arial, sans-serif;
+      background: linear-gradient(135deg, #eef2ff, #f9fafb);
+      min-height: 100vh;
+      margin: 0;
+      padding: 40px;
+      color: var(--text-dark);
     }
 
+    /* Header */
     h1 {
-        font-size: 1.6rem;
+      font-size: 2rem;
+      font-weight: 600;
+      margin-bottom: 30px;
     }
 
+    /* Main container */
     div {
-        flex-direction: column;
+      display: flex;
+      gap: 20px;
+      flex-wrap: wrap;
     }
 
+    /* Admin action buttons */
     a {
-        width: 100%;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-width: 180px;
+      padding: 14px 20px;
+      background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+      color: white;
+      text-decoration: none;
+      border-radius: 12px;
+      font-size: 1rem;
+      font-weight: 600;
+      letter-spacing: 0.3px;
+      box-shadow: var(--shadow);
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
     }
 
+    a:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 30px 50px rgba(74, 144, 226, 0.25);
+    }
+
+    /* Logout button */
     #logout-link {
+      position: absolute;
+      top: 25px;
+      right: 25px;
+      background: linear-gradient(135deg, var(--danger), var(--danger-dark));
+      padding: 10px 16px;
+      border-radius: 10px;
+      font-size: 0.95rem;
+      font-weight: 600;
+      box-shadow: 0 10px 25px rgba(255, 77, 77, 0.35);
+    }
+
+    #logout-link:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 20px 35px rgba(255, 77, 77, 0.45);
+    }
+
+    /* Responsive */
+    @media (max-width: 600px) {
+      body {
+        padding: 25px;
+      }
+
+      h1 {
+        font-size: 1.6rem;
+      }
+
+      div {
+        flex-direction: column;
+      }
+
+      a {
+        width: 100%;
+      }
+
+      #logout-link {
         position: static;
         margin-bottom: 20px;
         align-self: flex-end;
+      }
     }
-}
-
-    </style>
+  </style>
 </head>
 
 <body>
-    <h1>Welcome, Admin!</h1>
-    <div>
-        <a href="/show-questions">Show Questions</a>
-        <a href="/add-question">Add Question</a>
-    </div>
-    <a href="/" id="logout-link">log out</a>
-        
+  <h1>Welcome, Admin!</h1>
+  <div>
+    <a href="/show-questions">Show Questions</a>
+    <a href="/add-question">Add Question</a>
+  </div>
+  <a href="/log-out" id="logout-link">log out</a>
+
 </body>
 
 </html>

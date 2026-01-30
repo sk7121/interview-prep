@@ -10,6 +10,7 @@
       --primary: #4A90E2;
       --primary-dark: #357ABD;
       --danger: #ef4444;
+      --danger-dark: #dc2626;
       --bg: #f4f6fb;
       --card-bg: #ffffff;
       --text-dark: #1f2933;
@@ -36,7 +37,7 @@
 
     /* Page title */
     h1 {
-      margin-bottom: 10px;
+      margin-bottom: 20px;
       font-size: 2rem;
       font-weight: 600;
     }
@@ -55,18 +56,11 @@
       text-decoration: underline;
     }
 
-    /* Container */
-    .container {
-      width: 100%;
-      max-width: 900px;
-      display: flex;
-      flex-direction: column;
-      gap: 22px;
-    }
-
-    /* Result card */
+    /* Question card */
     .box {
       width: 100%;
+      max-width: 900px;
+      margin-bottom: 25px;
       padding: 22px 26px;
       background: var(--card-bg);
       border-radius: 16px;
@@ -74,46 +68,56 @@
       box-shadow: var(--shadow);
       display: flex;
       flex-direction: column;
-      gap: 8px;
+      gap: 14px;
       animation: fadeIn 0.4s ease;
     }
 
-    /* Show result button */
-    #show-btn {
+    /* Delete button */
+    #delete-btn {
       align-self: flex-end;
       text-decoration: none;
       font-size: 0.85rem;
       font-weight: 600;
-      padding: 7px 14px;
-      border-radius: 10px;
-      background: linear-gradient(135deg, var(--danger), #dc2626);
+      padding: 6px 12px;
+      border-radius: 8px;
+      background: linear-gradient(135deg, var(--danger), var(--danger-dark));
       color: white;
       transition: transform 0.2s ease, box-shadow 0.2s ease;
     }
 
-    #show-btn:hover {
+    #delete-btn:hover {
       transform: translateY(-1px);
       box-shadow: 0 8px 18px rgba(239, 68, 68, 0.4);
     }
 
-    /* Card text */
-    .box h3 {
-      margin: 6px 0 8px;
+    /* Question content */
+    .ques_box {
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    /* Text styling */
+    .ques_box h3 {
+      margin: 0 0 6px 0;
       font-size: 1rem;
       font-weight: 600;
-    }
-
-    .box p {
-      margin: 0;
-      font-size: 0.92rem;
-      color: var(--text-light);
-    }
-
-    .box strong {
       color: var(--text-dark);
     }
 
-    /* Animation */
+    .ques_box p {
+      margin: 0;
+      font-size: 0.92rem;
+      line-height: 1.45;
+      color: var(--text-light);
+    }
+
+    .ques_box strong {
+      color: var(--text-dark);
+    }
+
+    /* Fade animation */
     @keyframes fadeIn {
       from {
         opacity: 0;
@@ -127,7 +131,7 @@
     }
 
     /* Responsive */
-    @media (max-width: 600px) {
+    @media (max-width: 700px) {
       h1 {
         font-size: 1.6rem;
       }
@@ -140,39 +144,53 @@
 </head>
 
 <body>
-  <h1>Your Results</h1>
-  <div class="container">
-    <%if(results.length===0){%>
-    <h2 style="align-self:center;">No result found for userId : <%=userId%></h2>
-    <%}%>
-    <% for(result of results) { %>
-    <div class="box">
-      <a href="/show-results/result/<%= result._id %>" id="show-btn">Show Full Result</a>
-      <h3>RESULT ID: <%= result._id %>
+  <h1>Show Questions</h1>
+  <% for(question of questions) { %>
+  <div class="box">
+    <a href="/delete/question/<%= question._id %>" id="delete-btn">Delete</a>
+    <div class="ques_box">
+      <h3>Question ID: <%= question._id %>
       </h3>
-      <p><strong>userId:</strong>
-        <%= result.userId %>
+      <p><strong>difficulty:</strong>
+        <%= question.difficulty %>
       </p>
-      <p><strong>sessionId:</strong>
-        <%= result.sessionId %>
+      <p><strong>Question Text:</strong>
+        <%= question.questionText %>
+      </p>
+      <p><strong>Options:</strong></p>
+
+
+      <p><strong>Option A:</strong>
+        <%= question.optionA %>
+      </p>
+      <p><strong>Option B:</strong>
+        <%= question.optionB %>
+      </p>
+      <p><strong>Option C:</strong>
+        <%= question.optionC %>
+      </p>
+      <p><strong>Option D:</strong>
+        <%= question.optionD %>
       </p>
 
-      <p><strong>totalQuestions:</strong>
-        <%= result.totalQuestions %>
+
+      <p><strong>Correct Answer:</strong>
+        <%= question.correctAnswer %>
       </p>
-      <p><strong>correctAnswers:</strong>
-        <%= result.correctAnswers %>
+      <p><strong>interviewType:</strong>
+        <%= question.interviewType %>
       </p>
-      <p><strong>wrongAnswers:</strong>
-        <%= result.wrongAnswers %>
+      <p><strong>companyTags:</strong>
+        <%= question.companyTags %>
       </p>
-      <p><strong>scorePercentage:</strong>
-        <%= result.scorePercentage %>%
+      <p><strong>technologyTags:</strong>
+        <%= question.technologyTags %>
       </p>
     </div>
-    <% } %>
-  </div>
 
+
+  </div>
+  <% } %>
 </body>
 
 </html>

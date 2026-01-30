@@ -2,55 +2,55 @@ const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
 const questionSchema = new Schema({
-    questionText:{
-        type:String,
-        required:true,
+    questionText: {
+        type: String,
+        required: true,
     },
-    difficulty:{
-        type:String,
-        required:true,
-        enum:["beginner","intermediate","advanced"],
+    difficulty: {
+        type: String,
+        required: true,
+        enum: ["beginner", "intermediate", "advanced"],
     },
-    interviewType:[{
-        type:String,
-        enum:["technical","behavioral","managerial","case-study"]
+    interviewType: [{
+        type: String,
+        enum: ["technical", "behavioral", "managerial", "case-study"]
     }],
-    companyTags:[{
-        type:String,
+    companyTags: [{
+        type: String,
     }],
-    technologyTags:[{
-        type:String,
+    technologyTags: [{
+        type: String,
     }],
-    answerType:{
-        type:String,
-        enum:["mcq","text","code"],
-        required:true,
+    answerType: {
+        type: String,
+        enum: ["mcq", "text", "code"],
+        required: true,
     },
-    optionA:{
-        type:String,
+    optionA: {
+        type: String,
     },
-    optionB:{
-        type:String,
+    optionB: {
+        type: String,
     },
-    optionC:{
-        type:String,
+    optionC: {
+        type: String,
     },
-    optionD:{
-        type:String,
+    optionD: {
+        type: String,
     },
 
-    correctAnswer:{
-        type:mongoose.Schema.Types.Mixed,
-        required:true,
+    correctAnswer: {
+        type: mongoose.Schema.Types.Mixed,
+        required: true,
     },
-    explanation:{
-        type:String,
+    explanation: {
+        type: String,
     },
-    createdBy:{
-        type:mongoose.Schema.Types.ObjectId,
-        ref:"User",
-        required:true,
+    createdBy: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "User",
+        required: true,
     }
-},{ timestamps: true });
+}, { timestamps: true });
 
-module.exports = mongoose.model("Question",questionSchema);
+module.exports = mongoose.model("Question", questionSchema);
